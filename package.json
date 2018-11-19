@@ -1,0 +1,20 @@
+{
+  "name": "pixitstemplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "pixi.js": "^4.8.2"
+  },
+  "devDependencies": {
+    "@types/pixi.js": "^4.8.3",
+    "typescript": "^3.1.6",
+    "http-server": "^0.11.1"
+  },
+  "scripts": {
+    "server": "node_modules/.bin/http-server ./bin/ -o",
+    "build": "(rm -rf bin || true) && mkdir bin && cp index.html ./bin/ && cp node_modules/pixi.js/dist/pixi.min.js ./bin/ && cp node_modules/pixi.js/dist/pixi.min.js.map ./bin/ && cp -r assets/ ./bin/ && tsc"
+  },
+  "author": "Jonny B",
+  "license": "ISC"
+}
