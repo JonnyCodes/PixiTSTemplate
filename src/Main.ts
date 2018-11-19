@@ -23,7 +23,7 @@ namespace app {
         }
 
         private onLoaded(): void {
-            let sprite = new PIXI.Sprite(PIXI.loader.resources[AssetBundle.SPRITE.name].texture);
+            let sprite = new PIXI.Sprite(AssetBundle.SPRITE.texture);
             this._app.stage.addChild(sprite);
         }
     }
