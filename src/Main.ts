@@ -7,23 +7,23 @@ namespace app {
 
     export class Main {
 
-        private _app: PIXI.Application;
+        private _stage: Stage;
         private _stateShepard: StateShepard;
 
         constructor(document: Document) {
 
             // TODO: need to expose the actual canvas size for easy sprite positioning. (this._app.renderer.width & height)
 
-            this._app = new PIXI.Application({
+            this._stage = new Stage({
                 width: 960,
                 height: 540,
                 backgroundColor: 0xBADA55
             });
 
-            document.body.appendChild(this._app.view);
+            document.body.appendChild(this._stage.view);
 
             this._stateShepard = StateShepard.getInstance();
-            this._stateShepard.init(this._app.stage, [
+            this._stateShepard.init(this._stage, [
                 States.PRELOADER_STATE,
                 States.MENU_STATE
             ]);
@@ -38,7 +38,7 @@ namespace app {
             }
 
             //Render the stage
-            this._app.render();
+            this._stage.render();
         }
     }
 

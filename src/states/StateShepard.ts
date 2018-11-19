@@ -1,4 +1,5 @@
 /// <reference path="./States.ts" />
+/// <reference path="../display/Stage.ts" />
 
 namespace app {
     
@@ -9,7 +10,7 @@ namespace app {
         public currentState: IState;
 
         private _states: IStateMap[];
-        private _stage: PIXI.Container;
+        private _stage: Stage;
         
         public static getInstance(): StateShepard {
             if(!StateShepard.Instance) {
@@ -23,8 +24,9 @@ namespace app {
             this._states = [];
         }
 
-        public init(stage: PIXI.Container, states?: IStateMap[]): void {
+        public init(stage: Stage, states?: IStateMap[]): void {
             this._stage = stage;
+            console.log(this._stage);
             if (states) this._states = states;
         }
 
