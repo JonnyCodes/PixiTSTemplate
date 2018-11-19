@@ -5,28 +5,14 @@ namespace app {
     
     export class StateShepard {
 
-        private static Instance: StateShepard;
-
         public currentState: IState;
 
         private _states: IStateMap[];
-        private _stage: Stage;
-        
-        public static getInstance(): StateShepard {
-            if(!StateShepard.Instance) {
-                StateShepard.Instance = new StateShepard();
-            }
+        private _container: PIXI.Container;
 
-            return StateShepard.Instance;
-        }
-
-        private constructor() {
+        constructor(container: PIXI.Container, states?: IStateMap[]) {
+            this._container = container;
             this._states = [];
-        }
-
-        public init(stage: Stage, states?: IStateMap[]): void {
-            this._stage = stage;
-            console.log(this._stage);
             if (states) this._states = states;
         }
 
@@ -46,7 +32,7 @@ namespace app {
         // TODO: Transitions?
         public changeToState(stateName: string): void;
         public changeToState(state: IState): void;
-        public changeToState(stateOrName: IState | string): void {
+        public changeToState(stateOrName: string | IState): void {
             
             let newState: IState = null;
             if(typeof stateOrName === "string") {
@@ -64,7 +50,7 @@ namespace app {
             
             if (this.currentState) this.currentState.onExit();
             this.currentState = newState;
-            this.currentState.stage = this._stage;
+            this.currentState.container = this._container;
             this.currentState.onEnter();
         }
 

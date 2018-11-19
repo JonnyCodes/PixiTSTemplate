@@ -1,7 +1,7 @@
 namespace app {
 
     export interface IState {
-        stage: Stage;
+        container: PIXI.Container;
         onEnter(): void;
         onExit(): void;
         update(delta: number): void
@@ -9,8 +9,7 @@ namespace app {
 
     export class State implements IState {
 
-        public set stage(stage: Stage) { this._stage = stage; }
-        protected _stage: Stage;
+        public container: PIXI.Container;
 
         public onEnter(): void {
             //

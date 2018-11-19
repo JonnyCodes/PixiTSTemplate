@@ -18,9 +18,9 @@ namespace app {
 
             this._sprite = new PIXI.Sprite(AssetBundle.SPRITE.texture);
             this._sprite.pivot = new PIXI.Point(this._sprite.width / 2, this._sprite.height /2);
-            this._sprite.x = this._stage.width / 2;
-            this._sprite.y = this._stage.height / 2;
-            this._stage.addChild(this._sprite);
+            this._sprite.x = this.container.width / 2;
+            this._sprite.y = this.container.height / 2;
+            this.container.addChild(this._sprite);
         }
 
         public onExit(): void {

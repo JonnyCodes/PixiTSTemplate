@@ -1,22 +1,31 @@
 namespace app {
 
-    export class Stage extends PIXI.Application {
+    export class Stage extends PIXI.Container {
 
-        public get width(): number { return this.renderer.width; }
-        public get height(): number { return this.renderer.height; }
+        public get width(): number { return this._renderer.width; };
+        public get height(): number { return this._renderer.height; };
 
-        constructor(options: PIXI.ApplicationOptions) {
-            super(options);
+        public get stateShepard(): StateShepard { return this._stateShepard; };
+        private _stateShepard: StateShepard;
+
+        private _renderer: PIXI.WebGLRenderer | PIXI.CanvasRenderer;
+
+        constructor(renderer: PIXI.WebGLRenderer | PIXI.CanvasRenderer) {
+            super();
+
+            this._renderer = renderer;
+
+            this._stateShepard = new StateShepard(this, [
+                States.PRELOADER_STATE,
+                States.MENU_STATE
+            ]);
+            this._stateShepard.changeToState(States.PRELOADER_STATE.name);
         }
 
-        public addChild<T extends PIXI.DisplayObject>(child: T): T {
-
-            return this.stage.addChild<T>(child);
-        }
-
-        public removeChild(child: PIXI.DisplayObject): PIXI.DisplayObject {
-
-            return this.stage.removeChild(child);
+        public update(delta: number): void {
+            if (this._stateShepard) {
+                this._stateShepard.update(delta);
+            }
         }
     }
 }

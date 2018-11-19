@@ -20,7 +20,7 @@ namespace app {
         }
 
         private onLoaded(): void {
-            StateShepard.getInstance().changeToState(States.MENU_STATE.name);
+            (this.container as Stage).stateShepard.changeToState(States.MENU_STATE.name);
         }
 
         public onExit(): void {
