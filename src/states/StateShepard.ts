@@ -1,18 +1,24 @@
 /// <reference path="./States.ts" />
+/// <reference path="../signals/Signal.ts" />
 
 namespace app {
     
     export class StateShepard {
 
-        public currentState: IState;
-
+        private _currentState: State;
         private _states: IStateMap[];
         private _container: PIXI.Container;
+        private _changeStateSignal: Signal<string | State>;
 
         constructor(container: PIXI.Container, states?: IStateMap[]) {
-            this._container = container;
             this._states = [];
-            if (states) this._states = states;
+            this._container = container;
+            this._changeStateSignal = new Signal();
+            this._changeStateSignal.on(this.changeToState, this);
+
+            states.forEach((state) => {
+                this.addState(state);
+            });
         }
 
         public addState(stateMap: IStateMap): void {
@@ -24,16 +30,19 @@ namespace app {
                     }
                 });
 
+                stateMap.state.container = this._container;
+                stateMap.state.changeStateSignal = this._changeStateSignal;
+
                 this._states.push(stateMap);
             }
         }
 
         // TODO: Transitions?
         public changeToState(stateName: string): void;
-        public changeToState(state: IState): void;
-        public changeToState(stateOrName: string | IState): void {
+        public changeToState(state: State): void;
+        public changeToState(stateOrName: string | State): void {
             
-            let newState: IState = null;
+            let newState: State = null;
             if(typeof stateOrName === "string") {
                 for(let i = 0; i < this._states.length; i++) {
                     if (this._states[i].name === stateOrName) {
@@ -47,15 +56,14 @@ namespace app {
             
             if(newState == null) throw new Error("Couldn't find new state: " + stateOrName);
             
-            if (this.currentState) this.currentState.onExit();
-            this.currentState = newState;
-            this.currentState.container = this._container;
-            this.currentState.onEnter();
+            if (this._currentState) this._currentState.onExit();
+            this._currentState = newState;
+            this._currentState.onEnter();
         }
 
         public update(delta: number): void {
-            if (this.currentState) {
-                this.currentState.update(delta);
+            if (this._currentState) {
+                this._currentState.update(delta);
             }
         }
     }

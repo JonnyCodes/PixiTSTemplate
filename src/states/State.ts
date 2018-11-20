@@ -1,15 +1,11 @@
 namespace app {
 
-    export interface IState {
-        container: PIXI.Container;
-        onEnter(): void;
-        onExit(): void;
-        update(delta: number): void
-    }
-
-    export class State implements IState {
+    export class State {
 
         public container: PIXI.Container;
+
+        public set changeStateSignal(signal: Signal<string | State>) { this._changeStateSignal = signal; }
+        protected _changeStateSignal: Signal<string | State>;
 
         public onEnter(): void {
             //

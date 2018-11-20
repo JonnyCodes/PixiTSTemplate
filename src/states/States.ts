@@ -6,7 +6,7 @@ namespace app {
 
     export interface IStateMap {
         name: string,
-        state: IState
+        state: State
     }
 
     export class States {
