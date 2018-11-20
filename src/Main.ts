@@ -1,5 +1,4 @@
-/// <reference path="assets/AssetBundle.ts" />
-/// <reference path="states/StateShepard.ts" />
+/// <reference path="./display/Stage.ts" />
 
 namespace app {
 

@@ -1,3 +1,5 @@
+/// <reference path="../states/StateShepard.ts" />
+
 namespace app {
 
     export class Stage extends PIXI.Container {

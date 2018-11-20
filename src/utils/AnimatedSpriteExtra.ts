@@ -4,10 +4,6 @@ namespace app {
 
         private _remainingTime: number;
 
-        constructor(textures: PIXI.Texture[] | PIXI.extras.AnimatedSpriteTextureTimeObject[]) {
-            super(textures);
-        }
-
         // Play the movie clip once and stop at the end
         public playOnce(): void {
             this.onComplete = () => {

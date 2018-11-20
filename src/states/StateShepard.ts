@@ -1,5 +1,4 @@
 /// <reference path="./States.ts" />
-/// <reference path="../display/Stage.ts" />
 
 namespace app {
     
