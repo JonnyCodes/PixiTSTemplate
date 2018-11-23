@@ -15,7 +15,7 @@ namespace app {
                 backgroundColor: 0xBADA55
             });
 
-            this._stage = new Stage(this._app.renderer);
+            this._stage = new Stage(this._app.renderer, States.PRELOADER_STATE.name);
             this._app.stage.addChild(this._stage);
 
             document.body.appendChild(this._app.view);

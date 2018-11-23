@@ -13,7 +13,8 @@
   },
   "scripts": {
     "server": "node_modules/.bin/http-server ./bin/ -o",
-    "build": "(rm -rf bin || true) && mkdir bin && cp index.html ./bin/ && cp node_modules/pixi.js/dist/pixi.min.js ./bin/ && cp node_modules/pixi.js/dist/pixi.min.js.map ./bin/ && cp -r assets/ ./bin/ && tsc"
+    "copy": "(rm -rf bin || true) && mkdir bin && cp index.html ./bin/ && cp node_modules/pixi.js/dist/pixi.min.js ./bin/ && cp node_modules/pixi.js/dist/pixi.min.js.map ./bin/ && cp -r assets/ ./bin/",
+    "build": "npm run copy && tsc"
   },
   "author": "Jonny B",
   "license": "ISC"

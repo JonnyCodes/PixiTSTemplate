@@ -12,16 +12,13 @@ namespace app {
 
         private _renderer: PIXI.WebGLRenderer | PIXI.CanvasRenderer;
 
-        constructor(renderer: PIXI.WebGLRenderer | PIXI.CanvasRenderer) {
+        constructor(renderer: PIXI.WebGLRenderer | PIXI.CanvasRenderer, startingState: string) {
             super();
 
             this._renderer = renderer;
 
-            this._stateShepard = new StateShepard(this, [
-                States.PRELOADER_STATE,
-                States.MENU_STATE
-            ]);
-            this._stateShepard.changeToState(States.PRELOADER_STATE.name);
+            this._stateShepard = new StateShepard(this, States.getStates());
+            this._stateShepard.changeToState(startingState);
         }
 
         public update(delta: number): void {

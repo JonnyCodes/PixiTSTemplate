@@ -20,5 +20,12 @@ namespace app {
             name: "MenuState",
             state: new MenuState()
         }
+
+        public static getStates(): IStateMap[] {
+            return [
+                States.PRELOADER_STATE,
+                States.MENU_STATE
+            ]
+        }
     }
 }
