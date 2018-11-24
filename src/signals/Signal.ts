@@ -49,6 +49,14 @@ namespace app {
                 }
             }
         }
+
+        public destroy(): void {
+            for (let i = this._listeners.length - 1; i >= 0; i--) {
+                this._listeners[i].destroy();
+            }
+
+            this._listeners = null;
+        }
     }
 
     class SignalListener<T> {
@@ -74,9 +82,9 @@ namespace app {
         }
 
         public destroy(): void {
-            delete this._func;
-            delete this._context;
-            delete this._once;
+            this._func = null;
+            this._context = null;
+            this._once = null;
         }
 
     }
